@@ -43,7 +43,7 @@ def roast_category():
 
     roast_map = {'Light' : 1, 'Medium-Light' : 2, 'Medium' : 3, 'Dark' : 4}
 
-    df_coffee['roast_cat'] = df_coffee['roast'].map(color_map)
+    df_coffee['roast_cat'] = df_coffee['roast'].map(roast_map)
 
     return df_coffee
 
