@@ -36,8 +36,6 @@ def fit_linear_regression():
     except Exception as e:
         print(f'An error occured')
 
-if __name__ == "__main__":
-    fit_linear_regression()
 
 def roast_category():
     
@@ -72,6 +70,9 @@ def fit_decision_tree():
         print(f'An error occured')
 
 if __name__ == "__main__":
+
+    fit_linear_regression()
+
     fit_decision_tree()
 
 
