@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
 import pickle
 
 def get_coffee_data():
@@ -34,3 +35,13 @@ def fit_linear_regression():
             pickle.dump(lm, file)
     except Exception as e:
         print(f'An error occured')
+
+def roast_category():
+    
+    df_coffee = get_coffee_data()
+
+    roast_map = {'Light' : 1, 'Medium-Light' : 2, 'Medium' : 3, 'Dark' : 4}
+
+    df_coffee['roast_category'] = df_coffee['roast'].map(color_map)
+
+
