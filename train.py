@@ -46,6 +46,10 @@ def roast_category():
 
     df_coffee['roast_cat'] = df_coffee['roast'].map(roast_map)
 
+    df_coffee.dropna(subset = ['roast_cat'], inplace = True)
+
+    df_coffee['roast_cat'] = df_coffee['roast_cat'].astype(int)
+
     return df_coffee
 
 def fit_decision_tree():
