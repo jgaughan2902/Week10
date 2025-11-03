@@ -24,7 +24,7 @@ def fit_linear_regression():
 
     X = df_train[features]
 
-    y = df_train['price']
+    y = df_train['rating']
 
     lm = LinearRegression()
 
@@ -43,5 +43,23 @@ def roast_category():
     roast_map = {'Light' : 1, 'Medium-Light' : 2, 'Medium' : 3, 'Dark' : 4}
 
     df_coffee['roast_cat'] = df_coffee['roast'].map(color_map)
+
+    return df_coffee
+
+def fit_decision_tree():
+
+    df_coffee = roast_category()
+
+    df_train, df_test = train_test_split(df_coffee, test_size = 0.2, random_state = 42)
+
+    features = ['100g_USD', 'roast_cat']
+
+    X = df_train[features]
+
+    y = df_train['rating']
+
+    dt = DecisionTreeRegressor(random_state = 42)
+    
+    dt.fit(X, y)
 
 
