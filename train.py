@@ -1,6 +1,10 @@
 import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+import pickle
 
 def get_coffee_data():
+
     df_coffee = pd.read_csv("https://raw.githubusercontent.com/leontoddjohnson/datasets/refs/heads/main/data/coffee_analysis.csv")
 
     df_coffee.drop_duplicates(subset = 'desc_1', inplace = True)
@@ -8,3 +12,25 @@ def get_coffee_data():
     df_coffee.dropna(subset = ['desc_1', 'roast', 'loc_country'], inplace = True)
 
     return df_coffee
+
+def fit_linear_regression():
+
+    df_coffee = get_coffee_data()
+
+    df_train, df_test = train_test_split(df_coffee, test_size = 0.2, random_state = 42)
+
+    features = ['100g_USD']
+
+    X = df_train[features]
+
+    y = df_train['price']
+
+    lm = LinearRegression()
+
+    lm.fit(X, y)
+
+    try:
+        with open('model_1.pickle', 'wb') as file:
+            pickle.dump(lm, file)
+    except Exception as e:
+        print(f'An error occured')
