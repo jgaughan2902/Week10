@@ -36,6 +36,9 @@ def fit_linear_regression():
     except Exception as e:
         print(f'An error occured')
 
+if __name__ == "__main__":
+    fit_linear_regression()
+
 def roast_category():
     
     df_coffee = get_coffee_data()
