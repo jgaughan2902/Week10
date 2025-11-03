@@ -65,4 +65,13 @@ def fit_decision_tree():
     
     dt.fit(X, y)
 
+    try:
+        with open('model_2.pickle', 'wb') as file:
+            pickle.dump(dt, file)
+    except Exception as e:
+        print(f'An error occured')
+
+if __name__ == "__main__":
+    fit_decision_tree()
+
 
