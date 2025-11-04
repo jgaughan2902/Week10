@@ -69,15 +69,31 @@ def fit_linear_regression():
 
 
 def roast_category():
-    
+    '''
+    Maps all categorical roast values to valid
+    numerical inputs for the decision tree regressor model.
+
+    Parameters:
+    No input values
+
+    Return value:
+    df_coffee (pd.DataFrame): A data frame that contains the
+    coffee data but adds an additional column containing the
+    recoded roast category column.
+    '''
+    # Pull the original data set.
     df_coffee = get_coffee_data()
 
+    # Define the mapping for each category of roast.
     roast_map = {'Light' : 1, 'Medium-Light' : 2, 'Medium' : 3, 'Dark' : 4}
 
+    # Define a new column with the new recoded roast categories.
     df_coffee['roast_cat'] = df_coffee['roast'].map(roast_map)
 
+    # Drop any NAs although this isn't necessary for this assignment.
     df_coffee.dropna(subset = ['roast_cat'], inplace = True)
 
+    # Coerce the new roast_cat column into a numeric type.
     df_coffee['roast_cat'] = df_coffee['roast_cat'].astype(int)
 
     return df_coffee
