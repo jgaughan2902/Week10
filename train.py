@@ -10,11 +10,11 @@ def get_coffee_data():
     Retrieves the coffee data from the url.
 
     Parameters:
-    No input values
+    No input values.
 
     Return value:
     df_coffee (pd.DataFrame): A dataframe produced
-    from the data within the url
+    from the data within the url.
     '''
     # Read the raw coffee csv from the url.
     df_coffee = pd.read_csv("https://raw.githubusercontent.com/leontoddjohnson/datasets/refs/heads/main/data/coffee_analysis.csv")
@@ -33,11 +33,11 @@ def fit_linear_regression():
     lone predictor and rating as the response.
 
     Parameters:
-    No input values
+    No input values.
 
     Return value:
     No return value but it does produce a pickle file
-    containing the trained model
+    containing the trained model.
     '''
     # Establish the data set.
     df_coffee = get_coffee_data()
@@ -74,7 +74,7 @@ def roast_category():
     numerical inputs for the decision tree regressor model.
 
     Parameters:
-    No input values
+    No input values.
 
     Return value:
     df_coffee (pd.DataFrame): A data frame that contains the
@@ -99,21 +99,40 @@ def roast_category():
     return df_coffee
 
 def fit_decision_tree():
+    '''
+    Fits a decision tree regressor with 100g_USD and roast_cat
+    as the predictors and rating as the response.
 
+    Parameters:
+    No input values.
+
+    Return value:
+    No return value but it does produce a pickle file
+    containing the trained model.
+    '''
+
+    # Define the data frame as our newly recoded data set.
     df_coffee = roast_category()
 
+    # Do another 80/20 train and test split.
     df_train, df_test = train_test_split(df_coffee, test_size = 0.2, random_state = 42)
 
+    # Define the features as our pair of predictors.
     features = ['100g_USD', 'roast_cat']
 
+    # Only the two features in the train data set.
     X = df_train[features]
 
+    # Only the response in the train data set.
     y = df_train['rating']
 
+    # Initiate a DecisionTreeRegressor object.
     dt = DecisionTreeRegressor(random_state = 42)
     
+    # Fit the model using the features and response.
     dt.fit(X, y)
 
+    # Create a pickle file with the model.
     try:
         with open('model_2.pickle', 'wb') as file:
             pickle.dump(dt, file)
