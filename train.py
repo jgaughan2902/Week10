@@ -6,11 +6,23 @@ from sklearn.tree import DecisionTreeRegressor
 import pickle
 
 def get_coffee_data():
+    '''
+    Retrieves the coffee data from the url.
 
+    Parameters:
+    No input values
+
+    Return value:
+    df_coffee (pd.DataFrame): A dataframe produced
+    from the data within the url
+    '''
+    # Read the raw coffee csv from the url
     df_coffee = pd.read_csv("https://raw.githubusercontent.com/leontoddjohnson/datasets/refs/heads/main/data/coffee_analysis.csv")
 
+    # Drop duplicate instances
     df_coffee.drop_duplicates(subset = 'desc_1', inplace = True)
 
+    # Drop NA values
     df_coffee.dropna(subset = ['desc_1', 'roast', 'loc_country'], inplace = True)
 
     return df_coffee
